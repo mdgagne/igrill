@@ -179,10 +179,10 @@ class DeviceThread(threading.Thread):
             try:
                 logging.debug("Device thread {} (re)started, trying to connect to iGrill with address: {}".format(self.name, self.address))
                 device = self.device_types[self.type](self.address, self.name)
-                self.cayenne_client.reconnect()
                 while True:
                     temperature = device.read_temperature()
                     battery = device.read_battery()
+                    logging.debug("Starting publish")
                     utils.publish(temperature, battery, self.cayenne_client)
                     logging.debug("Published temp: {} and battery: {} to topic {}/{}".format(temperature, battery, self.topic, device.name))
                     logging.debug("Sleeping for {} seconds".format(self.interval))
