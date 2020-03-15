@@ -1,6 +1,6 @@
 devices:
-  - name:       'grill'                  # Unique name of the device
-    type:       'igrill_v3'              # Supported devices: igrill_mini, igrill_v2, igrill_v3
+  - name:       'smoker'                 # Unique name of the device
+    type:       'igrill_v2'              # Supported devices: igrill_mini, igrill_v2, igrill_v3
     address:    'D4:81:CA:20:CD:6C'      # The MAC of the device
     topic:      'temperature/smoker'     # The topic to publish on. will have name and probe number appended: <topic>/<name>/probe{1..4}
-    interval:   20                       # Polling interval
+    interval:   20                       # Polling interva
