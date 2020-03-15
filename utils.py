@@ -57,7 +57,7 @@ def publish(temperatures, battery, client):
         if temperatures[i]:
             client.fahrenheitWrite(i, temperatures[i])
 
-    client.virtualWrite(1, cayenne.client.TYPE_BATTERY, battery)
+    client.virtualWrite(1, battery/100.0, cayenne.client.TYPE_BATTERY, cayenne.client.UNIT_VOLTS)
 
 
 def get_devices(device_config):
