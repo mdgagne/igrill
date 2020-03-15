@@ -80,6 +80,7 @@ def log_setup(log_level, logfile):
 
 def mqtt_init(mqtt_config):
     """Setup mqtt connection"""
+    return
     mqtt_client = mqtt.Client()
 
     if 'auth' in mqtt_config:
