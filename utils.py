@@ -55,7 +55,7 @@ def log_setup(log_level, logfile):
 def publish(temperatures, battery, client):
     for i in range(1, 5):
         if temperatures[i]:
-            client.farenheitWrite(i, temperatures[i])
+            client.fahrenheitWrite(i, temperatures[i])
 
     client.virtualWrite(1, cayenne.client.TYPE_BATTERY, battery)
 
