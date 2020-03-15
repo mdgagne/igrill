@@ -5,13 +5,13 @@ import yaml
 from yamlreader import yaml_load
 
 
-def read_config(config_path, defaults):
+def read_config(config_path):
     """Read config file from given location, and parse properties"""
     if not os.path.isdir(config_path):
         raise ValueError("{0} is not a directory".format(config_path))
 
     try:
-        return yaml_load(config_path, defaults)
+        return yaml_load(config_path)
     except yaml.YAMLError:
         logging.exception("Failed to read YAML config from directory: {0}".format(config_path))
 
@@ -23,8 +23,8 @@ def strip_config(config, allowed_keys):
 class Config(object):
     config = None
 
-    def __init__(self, config_path, requirements, defaults):
-        self.config = read_config(config_path, defaults)
+    def __init__(self, config_path, requirements):
+        self.config = read_config(config_path)
         self.requiremnets = requirements
         self.valid = self.validator[type(self.config)](self, 'Base', self.config, self.requiremnets)
 

@@ -6,7 +6,7 @@ import threading
 import time
 
 from config import Config
-from utils import log_setup, mqtt_init, get_device_threads, config_requirements, config_defaults
+from utils import log_setup, get_device_threads, config_requirements
 
 
 def main():
@@ -25,7 +25,7 @@ def main():
     # Setup logging
     log_setup(options.log_level, options.log_destination)
 
-    config = Config(options.config_directory, config_requirements, config_defaults)
+    config = Config(options.config_directory, config_requirements)
 
     if options.configtest:
         exit(config.isvalid())
@@ -36,7 +36,7 @@ def main():
     run_event = threading.Event()
     run_event.set()
     # Get device threads
-    devices = get_device_threads(config.get_config('devices'), config.get_config('mqtt'), run_event)
+    devices = get_device_threads(config.get_config('devices'), config.get_config('cayenne'), run_event)
 
     for device in devices:
         device.start()

@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "e04108ee6f3548325d20a5e33e894c4215fd0ffecfec8e10bf506fd2bebe8b1b"
+            "sha256": "95f42cf7c26a5fb833e6ee232c292c7f50f421b1ddfb6eebd0ef304ccee12b62"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -22,6 +22,13 @@
             ],
             "index": "pypi",
             "version": "==1.3.0"
+        },
+        "cayenne-mqtt": {
+            "hashes": [
+                "sha256:4a271557809eaa841a5c57c3c879d4ecf7bb868202fad355e51d4810106123e3"
+            ],
+            "index": "pypi",
+            "version": "==1.1.0"
         },
         "future": {
             "hashes": [

@@ -12,6 +12,7 @@ paho-mqtt = "*"
 PyYAML = "*"
 yamlreader = "*"
 future = "*"
+cayenne-mqtt = "*"
 
 [dev-packages]
 

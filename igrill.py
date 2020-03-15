@@ -8,6 +8,7 @@ import bluepy.btle as btle
 import random
 
 import utils
+import cayenne.client
 
 class UUIDS(object):
     FIRMWARE_VERSION   = btle.UUID('64ac0001-4a4b-4b58-9f37-94d3c52ffdf7')
@@ -157,13 +158,18 @@ class DeviceThread(threading.Thread):
                     'igrill_v2': IGrillV2Peripheral,
                     'igrill_v3': IGrillV3Peripheral}
 
-    def __init__(self, thread_id, name, address, igrill_type, mqtt_config, topic, interval, run_event):
+    def __init__(self, thread_id, name, address, igrill_type, cayenne_config, topic, interval, run_event):
         threading.Thread.__init__(self)
         self.threadID = thread_id
         self.name = name
         self.address = address
         self.type = igrill_type
-        #self.mqtt_client = utils.mqtt_init(mqtt_config)
+        self.cayenne_client = cayenne.client.CayenneMQTTClient()
+        self.cayenne_client.begin(
+            cayenne_config["username"],
+            cayenne_config["password"],
+            cayenne_config["client-id"],
+            port=8883)
         self.topic = topic
         self.interval = interval
         self.run_event = run_event
@@ -173,11 +179,11 @@ class DeviceThread(threading.Thread):
             try:
                 logging.debug("Device thread {} (re)started, trying to connect to iGrill with address: {}".format(self.name, self.address))
                 device = self.device_types[self.type](self.address, self.name)
-                #self.mqtt_client.reconnect()
+                self.cayenne_client.reconnect()
                 while True:
                     temperature = device.read_temperature()
                     battery = device.read_battery()
-                    #utils.publish(temperature, battery, self.mqtt_client, self.topic, device.name)
+                    utils.publish(temperature, battery, self.cayenne_client)
                     logging.debug("Published temp: {} and battery: {} to topic {}/{}".format(temperature, battery, self.topic, device.name))
                     logging.debug("Sleeping for {} seconds".format(self.interval))
                     time.sleep(self.interval)
