@@ -1,5 +1,5 @@
 # Cayenne
 cayenne:
-    username:   'be1977d0-6584-11ea-a38a-d57172a4b4d4'     # Required (when auth is present)
-    password:   '7b387e96880a53b2bda8b10cfadf93786b2b0315' # Required
-    client-id:  'ee57ee90-6584-11ea-a38a-d57172a4b4d4-id'  # Required
+    username:   'cayenne user'       # Required (when auth is present)
+    password:   'cayenne password'   # Required
+    client-id:  'cayenne client id'  # Required
